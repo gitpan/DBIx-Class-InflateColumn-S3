@@ -1,0 +1,68 @@
+DBIx::Class::InflateColUusmenr::CSo3n(t3r)ibuted Perl DoDcBuImxe:n:tCaltaisosn::InflateColumn::S3(3)
+
+
+
+[1mNAME[0m
+       DBIx::Class::InflateColumn::S3 - pulls files off the FS and loads them
+       into Amazon's Simple Storage Service using NET::AMAZON::S3
+
+[1mSYNOPSIS[0m
+       Put this in your  DBIx::Class table class:
+
+        __PACKAGE__->add_columns(
+           # your other column definitions here
+           'object',
+           {
+               data_type   => 's3',
+               size        => 255,
+               bucket_name => $target_bucket_name
+           },
+           # and maybe some more here
+        );
+
+       To create a row with said S3 column:
+
+        $schema->resultset('YourClass')->create({
+           object      => {
+               #the name of the key you would like
+               key     => $key_name,
+               #the path to your file in the local FS
+               fs_path => $path,
+
+               # OPTIONAL, override the bucket defined in the table class
+               bucket  => $bucket,
+               # OPTIONAL, one of the recognize ACL types from the S3 docs
+               acl     => $ACL # defaults to private
+               # the accessID provided by amazon web services
+               access_id  => $access_id,
+               # the secret_key provided by amazon web services
+               secret_key => $secret_key
+           },
+        });
+
+       Retrieving a row with the an S3 column currently only retrieves the key
+       that was stored in S3 in the format of $bucket_name/$key.
+
+       More fun later!
+
+[1mTODO[0m
+       Remove dies and raise exceptions
+
+       Add delete methods,
+
+       Rreturn a simple object that provides convience accessors to basic
+       Net::Amazon::S3::Bucket methods
+
+[1mDESCRIPTION[0m
+       InflateColumn::S3
+
+[1mAUTHOR[0m
+       Emerson Mills
+
+[1mLICENSE[0m
+       This library is free software, you can redistribute it and/or modify it
+       under the same terms as Perl itself.
+
+
+
+perl v5.8.8                       2007-10-23 DBIx::Class::InflateColumn::S3(3)

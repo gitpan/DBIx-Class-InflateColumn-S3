@@ -1,0 +1,8 @@
+Revision history for DBIx-Class-InflateColumn-S3
+
+0.01a   2009/04/23 16:25:00 JST
+        Fix typos with 'acl_xml' and 'acl_short'
+
+0.01    2007/01/01 00:00:00 JST
+        First version, released on an unsuspecting world.
+
